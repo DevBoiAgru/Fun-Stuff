@@ -16,10 +16,23 @@
     <title>Laser Pointer</title>
     <style>
         * {
-            cursor: url("https://cdn.discordapp.com/emojis/1165345163091124315.webp"), pointer;
+            box-sizing: border-box;
         }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background-color: black;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: none;
         }
 
         #colorWheel {
@@ -29,10 +42,12 @@
             left: 50%;
             transform: translate(-50%, -50%);
             border: 0px solid white;
-            padding: 0px;
-            border-radius: 0px;
-            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #ffffffd0;
             z-index: 999;
+            left: 420px;
+            top: 69px;
         }
 
         #pointer {
@@ -43,9 +58,13 @@
             background-color: currentColor;
             position: absolute;
             box-shadow: 0 0 10px 5px currentColor,
-                        0 0 20px currentColor,
-                        0 0 25px currentColor,
-                        0 0 30px currentColor;
+              0 0 20px currentColor,
+              0 0 25px currentColor,
+              0 0 30px currentColor;
+        }
+
+        .spacer{
+            margin: 10px;
         }
     </style>
 </head>
@@ -55,17 +74,30 @@
     <div id="pointer"></div>
 
     <div id="colorWheel">
-        <input type="color" id="colorPicker" value="#ff0000">
+        <label for="colorPicker">Set laser colour</label>
+        <input type="color" id="colorPicker" value="#ff0000"/>
+        <div class="spacer"></div>
+        <label for="file">Set background image</label>
+        <input id='file' type='file'/>
     </div>
 
     <script>
         const colorWheel = document.getElementById('colorWheel');
         const colorPicker = document.getElementById('colorPicker');
-        const laser = document.getElementById("pointer");
+        const laser = document.getElementById('pointer');
+        const file = document.getElementById('file');
+
+
+        file.addEventListener('change', function() {
+            const image = file.files[0];
+            const bgUrl = URL.createObjectURL(image);
+            document.body.style.backgroundImage = `url(${bgUrl})`;
+        });
 
         document.addEventListener('contextmenu', (e) => {
             e.preventDefault();
-            colorWheel.style.display = 'block';
+            colorWheel.style.display = 'grid';
+            document.body.style.cursor = 'auto';
             colorWheel.style.left = `${e.clientX}px`;
             colorWheel.style.top = `${e.clientY}px`;
         });
@@ -76,6 +108,7 @@
 
         document.addEventListener('click', (e) => {
             colorWheel.style.display = "none";
+            document.body.style.cursor = 'none';
         });
 
         document.addEventListener('mousemove', (e) => {
