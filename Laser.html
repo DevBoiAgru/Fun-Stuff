@@ -11,12 +11,13 @@
     <meta property="og:title" content="Sussy laser.">
     <meta property="og:description" content="A simple laser pointer. That's it. I promise">
     <meta name="theme-color" content="#FF0000">
-    <meta property="og:image" content="https://cdn.discordapp.com/attachments/1172240777599004863/1186612909908967474/image.png">
+    <meta property="og:image" content="https://i.postimg.cc/wBsqTCdd/Screenshot-2023-12-31-155526.png">
 
     <title>Laser Pointer</title>
     <style>
         * {
             box-sizing: border-box;
+            font-family: sans-serif;
         }
         
         html, body {
@@ -35,19 +36,17 @@
             cursor: none;
         }
 
-        #colorWheel {
+        #contextMenu {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border: 0px solid white;
             padding: 10px;
             border-radius: 5px;
-            background-color: #ffffffd0;
+            background-color: #181818e6;
+            color: white;
             z-index: 999;
-            left: 420px;
-            top: 69px;
         }
 
         #pointer {
@@ -60,11 +59,16 @@
             box-shadow: 0 0 10px 5px currentColor,
               0 0 20px currentColor,
               0 0 25px currentColor,
-              0 0 30px currentColor;
+              0 0 30px currentColor,
+              0 0 35px currentColor;
         }
 
         .spacer{
             margin: 10px;
+        }
+
+        label{
+            margin: 2px;
         }
     </style>
 </head>
@@ -73,8 +77,8 @@
 
     <div id="pointer"></div>
 
-    <div id="colorWheel">
-        <label for="colorPicker">Set laser colour</label>
+    <div id="contextMenu">
+        <label for="colorPicker">Set pointer colour</label>
         <input type="color" id="colorPicker" value="#ff0000"/>
         <div class="spacer"></div>
         <label for="file">Set background image</label>
@@ -82,7 +86,7 @@
     </div>
 
     <script>
-        const colorWheel = document.getElementById('colorWheel');
+        const contextMenu = document.getElementById('contextMenu');
         const colorPicker = document.getElementById('colorPicker');
         const laser = document.getElementById('pointer');
         const file = document.getElementById('file');
@@ -96,10 +100,10 @@
 
         document.addEventListener('contextmenu', (e) => {
             e.preventDefault();
-            colorWheel.style.display = 'grid';
+            contextMenu.style.display = 'grid';
             document.body.style.cursor = 'auto';
-            colorWheel.style.left = `${e.clientX}px`;
-            colorWheel.style.top = `${e.clientY}px`;
+            contextMenu.style.left = `${e.clientX}px`;
+            contextMenu.style.top = `${e.clientY}px`;
         });
 
         colorPicker.addEventListener('input', () => {
@@ -107,7 +111,7 @@
         });
 
         document.addEventListener('click', (e) => {
-            colorWheel.style.display = "none";
+            contextMenu.style.display = "none";
             document.body.style.cursor = 'none';
         });
 
