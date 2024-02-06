@@ -7,8 +7,11 @@
     Simple laser pointer which can change colours using colour input.
     [Laser.html]
 
-    Dependencies: None
 
+ - #### Endless House (Check it out [here](https://sussyworkshop.pythonanywhere.com/house))
+    ![long house](https://i.postimg.cc/x1bWvWXy/image.png)
+
+    Very simple useless infinitely long house, inspired by [endless horse](https://endless.horse/)
 
 
 ### More coming soon!
